@@ -1,12 +1,91 @@
-*.class
+import java.util.*;
+import java.io.*;
+import ou.*;
+/**
+ * Write a description of class MarathonAdmin here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class MarathonAdmin
+{
+   private static ArrayList<Runner> runners = new ArrayList<Runner>();
+   /**
+    * Constructor for objects of class MarathonAdmin
+    */
+   public MarathonAdmin()
+   {
+   }
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+   /**
+    * 
+    */
+   public void readInRunners()
+   {
+      System.out.println("25");
+      String pathname = OUFileChooser.getFilename();
+      System.out.println("27");
+      File aFile = new File(pathname);
+      System.out.println("29");
+      BufferedReader bufferedFileReader = null;
+      System.out.println("31");
+      Set<Runner> runners = new HashSet<>();
+      System.out.println("33");
+      try
+      {
+         String name;
+         String age;
+         String ageGroup;
+         Scanner lineScanner;
+         bufferedFileReader = new BufferedReader(new FileReader(aFile));
+         String currentLine = bufferedFileReader.readLine();
+         while (currentLine != null)
+         {
+            lineScanner = new Scanner(currentLine);
+            lineScanner.useDelimiter(",");
+            name = lineScanner.next();
+            age = lineScanner.next();
+            System.out.println("48");
+            if(Integer.parseInt(age)<18)
+            {
+               ageGroup ="Junior";
+               System.out.println("52");
+            }
+            else
+            
+            {
+               if(Integer.parseInt(age)>55)
+               {
+                  ageGroup ="Senior";
+                  System.out.println("65");
+               }
+               else
+               {
+                  ageGroup ="Standard";
+                  System.out.println("70");
+               }
+               System.out.println("72");
+            }
+            runners.add(new Runner(name, ageGroup));
+            currentLine = bufferedFileReader.readLine();
+            System.out.println("76");
+         }
+      }
+   
+   catch (Exception anException)
+   {
+      System.out.println("Error: " + anException);
+   }
+   finally
+   {
+      try
+      {
+         bufferedFileReader.close();
+      }
+      catch (Exception anException)
+      {
+         System.out.println("Error: " + anException);
+      }
+   }
+}
+}
